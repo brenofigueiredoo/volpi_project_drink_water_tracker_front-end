@@ -31,7 +31,7 @@ export const Historic =  () => {
         });
 
         axios
-        .get(`http://localhost:8000/api/goals/user/list/${user_id}`)
+        .get(`http://localhost:8000/api/goals/user/${user_id}`)
         .then((res) => {
           setGoals(res.data)
         })
