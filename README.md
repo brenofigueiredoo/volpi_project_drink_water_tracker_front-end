@@ -27,7 +27,7 @@ yarn install
 ```
 yarn dev
 ```
-para acessar a aplicação utilize: [localhost:8000](localhost:3000)
+Para acessar a aplicação utilize: [localhost:5173](localhost:5173)
 &nbsp;
 
 ## Ferramentas utilizadas 🛠 
