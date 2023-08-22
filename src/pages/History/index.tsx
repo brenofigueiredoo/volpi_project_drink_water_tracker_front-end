@@ -11,7 +11,7 @@ interface IUserReturn {
     weight_kg: number;
 }
 
-export const Historic =  () => {
+export const History =  () => {
 
     const { user_id } = useContext(UserContext);
 
