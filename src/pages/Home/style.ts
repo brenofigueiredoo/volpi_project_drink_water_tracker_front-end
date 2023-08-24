@@ -13,7 +13,6 @@ export const Container = styled.div`
     .p_errors {
         color: red;
     }
-
     
     form {
         display: flex;
@@ -48,6 +47,8 @@ export const Container = styled.div`
     }
 
     .div_header {
+        max-width: 366px;
         gap: 2rem;
+        display: flex;
     }
 `;

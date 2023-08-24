@@ -13,7 +13,7 @@ interface IUserReturn {
 
 export const History =  () => {
 
-    const { user_id } = useContext(UserContext);
+    const { userId } = useContext(UserContext);
 
     const navigate = useNavigate();
 
@@ -22,7 +22,7 @@ export const History =  () => {
 
     useEffect(() => {
         axios
-        .get(`http://localhost:8000/api/users/${user_id}`)
+        .get(`http://localhost:8000/api/users/${userId}`)
         .then((res) => {
           setUser(res.data)
         })
@@ -31,7 +31,7 @@ export const History =  () => {
         });
 
         axios
-        .get(`http://localhost:8000/api/goals/user/${user_id}`)
+        .get(`http://localhost:8000/api/user/${userId}/goals`)
         .then((res) => {
           setGoals(res.data)
         })
