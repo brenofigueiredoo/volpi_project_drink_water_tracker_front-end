@@ -22,8 +22,8 @@ interface IUserContext {
     user: any;
     setUser: React.Dispatch<React.SetStateAction<any | undefined>>;
     isPatched: boolean;
-    goal_id: string;
-    user_id: string;
+    goalId: string;
+    userId: string;
 }
 
 export const UserContext = createContext<IUserContext>({} as IUserContext);
@@ -32,8 +32,8 @@ export const ContextProvider = ({ children }: IContextProviderProps) => {
   const [user, setUser] = useState();
   const [isPatched, setIsPatched] = useState(false);
 
-  const goal_id = "a6312839-6e0d-447b-81e2-f157c6bf1d25"
-  const user_id = "fb179e59-408f-4f97-bca6-a63b1972c202"
+  const goalId = "c9ae38e5-973d-45a2-835c-01fdbc7de6ec"
+  const userId = "069efcf7-c6cc-4c59-98df-b353a475f212"
 
   const navigate = useNavigate();
 
@@ -55,7 +55,7 @@ export const ContextProvider = ({ children }: IContextProviderProps) => {
 
   const onDrinkWater = (data: IDataDrinkWater) => {
     axios
-      .patch(`http://localhost:8000/api/goals/${goal_id}/drinkwater`, data)
+      .patch(`http://localhost:8000/api/goals/${goalId}/drinkwater`, data)
       .then((res) => {
         console.log(res);
         setIsPatched(!isPatched)
@@ -66,7 +66,7 @@ export const ContextProvider = ({ children }: IContextProviderProps) => {
   };
 
   return (
-    <UserContext.Provider value={{ onRegister, onDrinkWater, user, setUser, isPatched, goal_id, user_id }}>
+    <UserContext.Provider value={{ onRegister, onDrinkWater, user, setUser, isPatched, goalId, userId }}>
       {children}
     </UserContext.Provider>
   );

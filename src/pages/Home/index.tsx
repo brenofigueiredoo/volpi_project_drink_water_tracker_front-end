@@ -23,12 +23,12 @@ export const Home = () => {
 
     const navigate = useNavigate();
 
-    const { onDrinkWater, isPatched, goal_id } = useContext(UserContext);
+    const { onDrinkWater, isPatched, goalId } = useContext(UserContext);
 
     useEffect(() => {
     axios
       .get(
-        `http://localhost:8000/api/goals/${goal_id}`
+        `http://localhost:8000/api/goals/${goalId}`
       )
       .then((res) => {
         setGoal(res.data)
@@ -110,7 +110,7 @@ export const Home = () => {
             </section>
 
             <h2>Chegou na meta hoje ? </h2>
-            {goal !== undefined && goal?.goal_consumed_percentage < 100 ? <h2 className="td_key">NÃO!</h2> : <h2 className="td_key">SIM!</h2>}
+            {goal !== undefined && goal?.goal_consumed_percentage == 100 ? <h2 className="td_key">SIM!</h2> : <h2 className="td_key">NÃO!</h2>}
         </Container>
         </>
     )
