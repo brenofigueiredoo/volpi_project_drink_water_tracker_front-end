@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import axios from "axios";
 import { ReactNode, createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { api } from "../services/api";
 
 interface IContextProviderProps {
     children: ReactNode;
@@ -32,8 +32,8 @@ export const ContextProvider = ({ children }: IContextProviderProps) => {
   const [user, setUser] = useState();
   const [isPatched, setIsPatched] = useState(false);
 
-  const goalId = "c9ae38e5-973d-45a2-835c-01fdbc7de6ec"
-  const userId = "069efcf7-c6cc-4c59-98df-b353a475f212"
+  const goalId = "13ad72ee-a542-47bc-a501-d1c5c8cc4bb8"
+  const userId = "549e96d7-4bc4-416b-a582-c7413a68c4af"
 
   const navigate = useNavigate();
 
@@ -41,8 +41,8 @@ export const ContextProvider = ({ children }: IContextProviderProps) => {
     
     data.weight_kg = +data.weight_kg
 
-    axios
-      .post("http://localhost:8000/api/users", data)
+    api
+      .post("/users", data)
       .then((res) => {
         console.log(res);
         setUser(res.data.id)
@@ -54,8 +54,8 @@ export const ContextProvider = ({ children }: IContextProviderProps) => {
   };
 
   const onDrinkWater = (data: IDataDrinkWater) => {
-    axios
-      .patch(`http://localhost:8000/api/goals/${goalId}/drinkwater`, data)
+    api
+      .patch(`/goals/${goalId}/drinkwater`, data)
       .then((res) => {
         console.log(res);
         setIsPatched(!isPatched)

@@ -1,11 +1,11 @@
 import {  useContext, useEffect, useState } from "react";
 import { Container } from "./style"
-import axios from "axios";
 import { IDataDrinkWater, UserContext } from "../../contexts/UserContext";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import {useNavigate} from "react-router-dom"
+import { api } from "../../services/api";
 
 export interface IGoalResponse {
     date: string
@@ -26,9 +26,9 @@ export const Home = () => {
     const { onDrinkWater, isPatched, goalId } = useContext(UserContext);
 
     useEffect(() => {
-    axios
+    api
       .get(
-        `http://localhost:8000/api/goals/${goalId}`
+        `/goals/${goalId}`
       )
       .then((res) => {
         setGoal(res.data)

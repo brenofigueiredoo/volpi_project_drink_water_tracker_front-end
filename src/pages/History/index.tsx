@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../contexts/UserContext";
-import axios from "axios"
 import { IGoalResponse } from "../Home";
 import { Container } from "./style";
 import { useNavigate } from "react-router-dom";
+import { api } from "../../services/api";
 
 interface IUserReturn {
     id: string;
@@ -21,8 +21,8 @@ export const History =  () => {
     const [user, setUser] = useState<IUserReturn>()
 
     useEffect(() => {
-        axios
-        .get(`http://localhost:8000/api/users/${userId}`)
+        api
+        .get(`/users/${userId}`)
         .then((res) => {
           setUser(res.data)
         })
@@ -30,8 +30,8 @@ export const History =  () => {
           console.log(err.response.data.message);
         });
 
-        axios
-        .get(`http://localhost:8000/api/user/${userId}/goals`)
+        api
+        .get(`/user/${userId}/goals`)
         .then((res) => {
           setGoals(res.data)
         })
