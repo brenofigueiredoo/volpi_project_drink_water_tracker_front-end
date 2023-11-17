@@ -1,25 +1,35 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-    table {
-        width: 100%;
-    }
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 
-    .td_key {
-        color: gray;
-    }
+  table {
+    width: 100%;
+  }
 
-    .div_card_goals {
-        border-bottom: 1px solid #535bf2;;
-    }
+  .td_key {
+    color: gray;
+  }
 
-    .div_header {
-        display: flex;
-        align-items: center;
-        gap: 2rem;
-    }
+  .div_card_goals {
+    border-bottom: 1px solid #535bf2;
+    max-width: 30rem;
+  }
 
-    .div_header_button {
-        min-height: 3rem;
-    }
+  .div_header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+  }
+
+  .div_header_button {
+    min-height: 3rem;
+  }
+
+  .div__father {
+    margin: 0 1rem 0 1rem;
+  }
 `;

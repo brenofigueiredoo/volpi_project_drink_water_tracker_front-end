@@ -1,16 +1,14 @@
 import { useContext } from "react";
-import { Container } from "./style";
-import { IDataRegister, UserContext } from "../../contexts/UserContext";
+import { IDataLogin, UserContext } from "../../contexts/UserContext";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
+import { Container } from "../UserRegister/style";
 
-export const UserRegister = () => {
-  const { onRegister } = useContext(UserContext);
+export const UserLogin = () => {
+  const { onLogin } = useContext(UserContext);
 
   const schema = yup.object({
-    username: yup.string().required("Nome é obrigatória"),
-    weight_kg: yup.number().required("Peso é obrigatório"),
     email: yup.string().email().required("Email é obrigatório"),
     password: yup.string().required("Senha é obrigatória"),
   });
@@ -19,18 +17,13 @@ export const UserRegister = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IDataRegister>({
+  } = useForm<IDataLogin>({
     resolver: yupResolver(schema),
   });
 
   return (
     <Container>
-      <form onSubmit={handleSubmit(onRegister)}>
-        <div>
-          <p>Nome</p>
-          <input type="text" placeholder="Nome" {...register("username")} />
-          <p className="p_errors">{errors.username?.message}</p>
-        </div>
+      <form onSubmit={handleSubmit(onLogin)}>
         <div>
           <p>Email</p>
           <input type="text" placeholder="Email" {...register("email")} />
@@ -45,18 +38,8 @@ export const UserRegister = () => {
           />
           <p className="p_errors">{errors.password?.message}</p>
         </div>
-        <div>
-          <p>Peso em KG</p>
-          <input
-            type="text"
-            placeholder="Peso"
-            {...register("weight_kg")}
-            defaultValue={0}
-          />
-          <p className="p_errors">{errors.weight_kg?.message}</p>
-        </div>
 
-        <button type="submit">Cadastrar</button>
+        <button type="submit">Entrar</button>
       </form>
     </Container>
   );

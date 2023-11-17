@@ -1,117 +1,119 @@
-import {  useContext, useEffect, useState } from "react";
-import { Container } from "./style"
+import { useContext, useEffect } from "react";
+import { Container } from "./style";
 import { IDataDrinkWater, UserContext } from "../../contexts/UserContext";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import {useNavigate} from "react-router-dom"
-import { api } from "../../services/api";
-
-export interface IGoalResponse {
-    date: string
-    goal_consumed_ml: number
-    goal_consumed_percentage: number
-    goal_of_the_day_ml: number
-    id: string
-    remaining_goals_ml: number
-    user: string
-}
+import { useNavigate } from "react-router-dom";
 
 export const Home = () => {
+  const navigate = useNavigate();
 
-    const [goal, setGoal] = useState<IGoalResponse>();
+  const {
+    onDrinkWater,
+    isPatched,
+    onCreateGoal,
+    onRetrieverGoalByDate,
+    notFound,
+    goal,
+    goalLoaded,
+  } = useContext(UserContext);
 
-    const navigate = useNavigate();
+  useEffect(() => {
+    onRetrieverGoalByDate();
+  }, [goalLoaded, isPatched]);
 
-    const { onDrinkWater, isPatched, goalId } = useContext(UserContext);
+  useEffect(() => {
+    notFound && onCreateGoal();
+  }, [notFound]);
 
-    useEffect(() => {
-    api
-      .get(
-        `/goals/${goalId}`
-      )
-      .then((res) => {
-        setGoal(res.data)
-        });
-    }, [isPatched]);
-    
-    const schema = yup.object({
-        quantity: yup.number().required("A quantidade é obrigatória"),
-    });
+  const schema = yup.object({
+    quantity: yup.number().required("A quantidade é obrigatória"),
+  });
 
-    const {
-            register,
-            handleSubmit,
-            formState: { errors },
-        } = useForm<IDataDrinkWater>({
-            resolver: yupResolver(schema),
-    });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IDataDrinkWater>({
+    resolver: yupResolver(schema),
+  });
 
-    const partsDate = goal ? goal.date.split('-') : ""
-    const resultDate = goal?.date ?  partsDate[2] + '/' + partsDate[1] + '/' + partsDate[0] : ""
+  const partsDate = goal ? goal.date.split("-") : "";
+  const resultDate = goal?.date
+    ? partsDate[2] + "/" + partsDate[1] + "/" + partsDate[0]
+    : "";
 
-    return (
-        <>
-        <Container>
-            <div className="div_header">
-                <button className="div_header_button" type="submit" onClick={() => navigate("/cadastro", { replace: true })}>Cadastrar Usuário</button>
-                <button className="div_header_button" type="submit" onClick={() => navigate("/historico", { replace: true })}>Mostrar histórico</button>
-            </div>
-            <form onSubmit={handleSubmit(onDrinkWater)}>
-                <p>Data de  hoje: {resultDate}</p>
+  return (
+    <Container>
+      <div className="div_header">
+        <button
+          className="div_header_button"
+          type="submit"
+          onClick={() => navigate("/historico", { replace: true })}
+        >
+          Mostrar histórico
+        </button>
+      </div>
+      <form onSubmit={handleSubmit(onDrinkWater)}>
+        <p>Data de hoje: {resultDate}</p>
 
-                <section className="form_section">
-                    <div>
-                        <input type="radio" value="250" {...register("quantity")}/>
-                        <label>Copo pequeno 250ml</label>
-                    </div>
-                    <div>
-                        <input type="radio" value="350" {...register("quantity")}/>
-                        <label>Copo médio 350ml</label>
-                    </div>
-                    <div>
-                        <input type="radio" value="500" {...register("quantity")}/>
-                        <label>Garrafa média 500ml</label>
-                    </div>
-                    <p className="p_errors">{errors.quantity?.message}</p>
+        <section className="form_section">
+          <div>
+            <input type="radio" value="250" {...register("quantity")} />
+            <label>Copo pequeno 250ml</label>
+          </div>
+          <div>
+            <input type="radio" value="350" {...register("quantity")} />
+            <label>Copo médio 350ml</label>
+          </div>
+          <div>
+            <input type="radio" value="500" {...register("quantity")} />
+            <label>Garrafa média 500ml</label>
+          </div>
+          <p className="p_errors">{errors.quantity?.message}</p>
 
-                    <button className="form_button" type="submit">Consumir</button>
-                </section>
+          <button className="form_button" type="submit">
+            Consumir
+          </button>
+        </section>
+      </form>
 
-            </form>
+      <section>
+        <table>
+          <tbody>
+            <tr>
+              <td className="td_key">Meta do dia: </td>
+              <td>{goalLoaded && goal?.goal_of_the_day_ml}ml</td>
+            </tr>
+          </tbody>
+          <tbody>
+            <tr>
+              <td className="td_key">Meta restante: </td>
+              <td>{goalLoaded && goal?.remaining_goals_ml}ml</td>
+            </tr>
+          </tbody>
+          <tbody>
+            <tr>
+              <td className="td_key">Meta já consumida: </td>
+              <td>{goalLoaded && goal?.goal_consumed_ml}ml</td>
+            </tr>
+          </tbody>
+          <tbody>
+            <tr>
+              <td className="td_key">Meta já consumida (%): </td>
+              <td>{goalLoaded && goal?.goal_consumed_percentage}%</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
 
-            <section>
-                <table>
-                    <tbody>
-                        <tr>
-                            <td className="td_key">Meta do dia: </td>
-                            <td>{goal?.goal_of_the_day_ml}ml</td>
-                        </tr>
-                    </tbody>
-                    <tbody>
-                        <tr>
-                            <td className="td_key">Meta restante: </td>
-                            <td>{goal?.remaining_goals_ml}ml</td>
-                        </tr>
-                    </tbody>
-                    <tbody>
-                        <tr>
-                            <td className="td_key">Meta já consumida: </td>
-                            <td>{goal?.goal_consumed_ml}ml</td>
-                        </tr>
-                    </tbody>
-                    <tbody>
-                        <tr>
-                            <td className="td_key">Meta já consumida (%): </td>
-                            <td>{goal?.goal_consumed_percentage}%</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </section>
-
-            <h2>Chegou na meta hoje ? </h2>
-            {goal !== undefined && goal?.goal_consumed_percentage == 100 ? <h2 className="td_key">SIM!</h2> : <h2 className="td_key">NÃO!</h2>}
-        </Container>
-        </>
-    )
-}
+      <h2>Chegou na meta hoje ? </h2>
+      {goalLoaded && goal?.goal_consumed_percentage == 100 ? (
+        <h2 className="td_key">SIM!</h2>
+      ) : (
+        <h2 className="td_key">NÃO!</h2>
+      )}
+    </Container>
+  );
+};
