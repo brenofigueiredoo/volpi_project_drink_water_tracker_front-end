@@ -12,7 +12,7 @@ const Header = () => {
     <Container>
       <div className="container--logo">
         <img
-          src="/src/assets/drink-water.png"
+          src="/drink-water.png"
           alt="Image"
           className="container--logo--note_image"
         />
