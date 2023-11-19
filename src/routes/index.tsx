@@ -8,9 +8,7 @@ import { UserContext } from "../contexts/UserContext";
 import Profile from "../pages/Profile";
 
 export const RoutersMain = () => {
-  const token: string | null = window.localStorage.getItem("authToken");
-
-  useContext(UserContext);
+  const { token } = useContext(UserContext);
 
   return (
     <Routes>

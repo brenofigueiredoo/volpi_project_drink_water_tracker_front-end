@@ -70,6 +70,7 @@ interface IUserContext {
   setGoalLoaded: React.Dispatch<React.SetStateAction<boolean>>;
   onRetriverUser: () => void;
   onUpdateUser: (data: IDataUpdate) => void;
+  token: string | null;
 }
 
 export const UserContext = createContext<IUserContext>({} as IUserContext);
@@ -82,6 +83,8 @@ export const ContextProvider = ({ children }: IContextProviderProps) => {
   const [goal, setGoal] = useState<IGoalResponse>();
 
   const navigate = useNavigate();
+
+  const token: string | null = window.localStorage.getItem("authToken");
 
   const onRegister = (data: IDataRegister) => {
     data.weight_kg = +data.weight_kg;
@@ -198,6 +201,7 @@ export const ContextProvider = ({ children }: IContextProviderProps) => {
         setGoalLoaded,
         onRetriverUser,
         onUpdateUser,
+        token,
       }}
     >
       {children}

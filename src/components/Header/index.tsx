@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Container } from "./style";
 import { FaUser } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [isActive, setActive] = useState<boolean>(false);
@@ -23,29 +24,29 @@ const Header = () => {
       </div>
 
       <nav className={isActive ? "active" : ""}>
-        <a
-          href="/perfil"
+        <Link
+          to="/perfil"
           onClick={closeMenu}
           style={{ gap: "2rem", color: "#753fc8", width: "4rem" }}
         >
           <FaUser size="1.8rem" />
           Perfil
-        </a>
-        <a href="/entrar" onClick={closeMenu}>
+        </Link>
+        <Link to="/entrar" onClick={closeMenu}>
           Entrar
-        </a>
-        <a href="/cadastrar" onClick={closeMenu}>
+        </Link>
+        <Link to="/cadastrar" onClick={closeMenu}>
           Cadastrar
-        </a>
-        <a
-          href="/entrar"
+        </Link>
+        <Link
+          to="/entrar"
           onClick={() => window.localStorage.removeItem("authToken")}
         >
           Sair
-        </a>
-        <a href="/home" onClick={closeMenu}>
+        </Link>
+        <Link to="/home" onClick={closeMenu}>
           Home
-        </a>
+        </Link>
       </nav>
 
       <div
