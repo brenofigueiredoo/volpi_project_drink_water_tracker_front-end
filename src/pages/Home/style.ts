@@ -6,6 +6,8 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
 
+  margin-top: 5rem;
+
   p {
     display: flex;
   }
@@ -53,9 +55,8 @@ export const Container = styled.div`
   }
 
   .div_header_button {
-    max-width: 6rem;
-    width: 100%;
-    height: 3.6rem;
+    width: 14rem;
+    height: 2.637rem;
 
     display: flex;
     align-items: center;

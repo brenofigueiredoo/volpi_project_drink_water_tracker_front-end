@@ -15,6 +15,11 @@ export interface IDataRegister {
   password: string;
 }
 
+export interface IDataUpdate {
+  username: string;
+  weight_kg: number;
+}
+
 export interface IDataLogin {
   email: string;
   password: string;
@@ -22,6 +27,14 @@ export interface IDataLogin {
 
 export interface IDataDrinkWater {
   quantity: number;
+}
+
+export interface IDataUser {
+  id: string;
+  username: string;
+  weight_kg: number;
+  goal_ml: number;
+  email: string;
 }
 
 export interface IGoalResponse {
@@ -43,8 +56,8 @@ export interface IGoalResponse {
 interface IUserContext {
   onRegister: (data: IDataRegister) => void;
   onDrinkWater: (data: IDataDrinkWater) => void;
-  user: any;
-  setUser: React.Dispatch<React.SetStateAction<any | undefined>>;
+  user: IDataUser | undefined;
+  setUser: React.Dispatch<React.SetStateAction<IDataUser | undefined>>;
   isPatched: boolean;
   onLogin: (data: IDataLogin) => void;
   onCreateGoal: () => void;
@@ -55,12 +68,14 @@ interface IUserContext {
   setGoal: React.Dispatch<React.SetStateAction<IGoalResponse | undefined>>;
   goalLoaded: boolean;
   setGoalLoaded: React.Dispatch<React.SetStateAction<boolean>>;
+  onRetriverUser: () => void;
+  onUpdateUser: (data: IDataUpdate) => void;
 }
 
 export const UserContext = createContext<IUserContext>({} as IUserContext);
 
 export const ContextProvider = ({ children }: IContextProviderProps) => {
-  const [user, setUser] = useState();
+  const [user, setUser] = useState<IDataUser>();
   const [isPatched, setIsPatched] = useState<boolean>(false);
   const [notFound, setNotFound] = useState<boolean>(false);
   const [goalLoaded, setGoalLoaded] = useState<boolean>(false);
@@ -76,7 +91,7 @@ export const ContextProvider = ({ children }: IContextProviderProps) => {
       .then((res) => {
         setUser(res.data.id);
         toast.success("Usuário cadastrado!");
-        navigate("/login", { replace: true });
+        navigate("/entrar", { replace: true });
       })
       .catch(() => {
         toast.error("Erro ao cadastrar");
@@ -141,6 +156,29 @@ export const ContextProvider = ({ children }: IContextProviderProps) => {
       });
   };
 
+  const onRetriverUser = () => {
+    api
+      .get("/users/detail", config())
+      .then((res) => {
+        setUser(res.data);
+      })
+      .catch(() => {
+        toast.error("Erro ao cadastrar");
+      });
+  };
+
+  const onUpdateUser = (data: IDataUpdate) => {
+    api
+      .patch("/users/detail", data, config())
+      .then(() => {
+        toast.success("Usuário Atualizado!");
+        navigate("/home", { replace: true });
+      })
+      .catch(() => {
+        toast.error("Erro ao cadastrar");
+      });
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -158,6 +196,8 @@ export const ContextProvider = ({ children }: IContextProviderProps) => {
         setGoal,
         goalLoaded,
         setGoalLoaded,
+        onRetriverUser,
+        onUpdateUser,
       }}
     >
       {children}

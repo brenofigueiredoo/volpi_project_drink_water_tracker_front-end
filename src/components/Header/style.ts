@@ -5,6 +5,11 @@ export const Container = styled.div`
   align-items: center;
   justify-content: space-around;
 
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 100%;
   height: 3.563rem;
   background-color: #1a1a1a;
   margin-bottom: 2rem;
@@ -199,6 +204,8 @@ export const Container = styled.div`
       opacity: 1;
       visibility: visible;
       background: #1a1a1a;
+      width: 100%;
+      height: 100%;
     }
   }
 `;

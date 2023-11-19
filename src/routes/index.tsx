@@ -5,6 +5,7 @@ import { History } from "../pages/History";
 import { UserLogin } from "../pages/UserLogin";
 import { useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
+import Profile from "../pages/Profile";
 
 export const RoutersMain = () => {
   const token: string | null = window.localStorage.getItem("authToken");
@@ -13,7 +14,7 @@ export const RoutersMain = () => {
 
   return (
     <Routes>
-      <Route path="/cadastro" element={<UserRegister />} />
+      <Route path="/cadastrar" element={<UserRegister />} />
       <Route path="/entrar" element={<UserLogin />} />
       <Route path="/historico" element={<History />} />
 
@@ -21,6 +22,12 @@ export const RoutersMain = () => {
         <Route path="/home" element={<Home />} />
       ) : (
         <Route path="/home" element={<Navigate to="/entrar" />} />
+      )}
+
+      {token !== null ? (
+        <Route path="/perfil" element={<Profile />} />
+      ) : (
+        <Route path="/perfil" element={<Navigate to="/entrar" />} />
       )}
 
       <Route
