@@ -40,7 +40,10 @@ const Header = () => {
         </Link>
         <Link
           to="/entrar"
-          onClick={() => window.localStorage.removeItem("authToken")}
+          onClick={() => {
+            window.localStorage.removeItem("authToken");
+            closeMenu();
+          }}
         >
           Sair
         </Link>
