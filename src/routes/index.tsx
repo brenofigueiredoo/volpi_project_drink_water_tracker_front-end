@@ -29,7 +29,7 @@ export const RoutersMain = () => {
       )}
 
       <Route
-        path={"*"}
+        path={"*" || "/"}
         element={
           token === null ? (
             <Navigate to={"/entrar"} />
