@@ -39,42 +39,44 @@ export const History = () => {
             Ir para Home
           </button>
         </div>
-        {goals?.map((elem, index) => (
-          <div className="div_card_goals" key={index}>
-            <table>
-              <tbody>
-                <tr>
-                  <td className="td_key">Data: </td>
-                  <td>{elem.date}</td>
-                </tr>
-              </tbody>
-              <tbody>
-                <tr>
-                  <td className="td_key">Meta: </td>
-                  <td>{elem.goal_of_the_day_ml}ml</td>
-                </tr>
-              </tbody>
-              <tbody>
-                <tr>
-                  <td className="td_key">Meta já consumida: </td>
-                  <td>{elem.goal_consumed_ml}ml</td>
-                </tr>
-              </tbody>
-              <tbody>
-                <tr>
-                  <td className="td_key">Chegou na meta ? </td>
-                  <td>
-                    {elem.goal_consumed_percentage !== 100 ? (
-                      <p>NÃO</p>
-                    ) : (
-                      <p>SIM</p>
-                    )}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        ))}
+        <section className="section__card__goals">
+          {goals?.map((elem, index) => (
+            <div className="div_card_goals" key={index}>
+              <table>
+                <tbody>
+                  <tr>
+                    <td className="td_key">Data: </td>
+                    <td>{elem.date}</td>
+                  </tr>
+                </tbody>
+                <tbody>
+                  <tr>
+                    <td className="td_key">Meta: </td>
+                    <td>{elem.goal_of_the_day_ml}ml</td>
+                  </tr>
+                </tbody>
+                <tbody>
+                  <tr>
+                    <td className="td_key">Meta já consumida: </td>
+                    <td>{elem.goal_consumed_ml}ml</td>
+                  </tr>
+                </tbody>
+                <tbody>
+                  <tr>
+                    <td className="td_key">Chegou na meta ? </td>
+                    <td>
+                      {elem.goal_consumed_percentage !== 100 ? (
+                        <p>NÃO</p>
+                      ) : (
+                        <p>SIM</p>
+                      )}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          ))}
+        </section>
       </div>
     </Container>
   );

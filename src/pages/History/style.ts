@@ -16,6 +16,7 @@ export const Container = styled.div`
 
   .div_card_goals {
     border-bottom: 1px solid #535bf2;
+    border-radius: 12px;
     max-width: 30rem;
   }
 
@@ -32,5 +33,25 @@ export const Container = styled.div`
 
   .div__father {
     margin: 0 1rem 0 1rem;
+  }
+
+  .section__card__goals {
+    height: 32rem;
+    overflow-y: scroll;
+
+    scrollbar-width: thin;
+    scrollbar-color: #535bf2 #282c34;
+  }
+
+  .section__card__goals::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .section__card__goals::-webkit-scrollbar-thumb {
+    background-color: gray;
+  }
+
+  .section__card__goals::-webkit-scrollbar-track {
+    background-color: transparent;
   }
 `;
