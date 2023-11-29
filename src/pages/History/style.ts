@@ -36,7 +36,7 @@ export const Container = styled.div`
   }
 
   .section__card__goals {
-    height: 32rem;
+    height: 80vh;
     overflow-y: scroll;
 
     scrollbar-width: thin;
@@ -53,5 +53,11 @@ export const Container = styled.div`
 
   .section__card__goals::-webkit-scrollbar-track {
     background-color: transparent;
+  }
+
+  @media screen and (min-heigth: 500px) {
+    .section__card__goals {
+      height: 12rem;
+    }
   }
 `;
