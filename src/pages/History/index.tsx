@@ -9,14 +9,24 @@ export const History = () => {
 
   const [goals, setGoals] = useState<IGoalResponse[]>();
 
+  const formatDate = (inputDate: string) => {
+    const [year, month, day] = inputDate.split("-");
+    return `${day}/${month}/${year}`;
+  };
+
   useEffect(() => {
     api
       .get(`/goals`, config())
       .then((res) => {
-        const sortedGoals = res.data.sort(
+        const formattedGoals = res.data.map((goal: IGoalResponse) => ({
+          ...goal,
+          date: formatDate(goal.date),
+        }));
+
+        const sortedGoals = formattedGoals.sort(
           (a: IGoalResponse, b: IGoalResponse) => {
-            const dateA = new Date(a.date).getTime();
-            const dateB = new Date(b.date).getTime();
+            const dateA = new Date(formatDate(a.date)).getTime();
+            const dateB = new Date(formatDate(b.date)).getTime();
 
             return dateB - dateA;
           }

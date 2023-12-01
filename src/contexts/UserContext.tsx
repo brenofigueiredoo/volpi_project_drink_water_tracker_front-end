@@ -117,7 +117,7 @@ export const ContextProvider = ({ children }: IContextProviderProps) => {
 
   const onCreateGoal = () => {
     const currentYear = new Date().getFullYear();
-    const currentMonth = new Date().getMonth();
+    const currentMonth = new Date().getMonth() + 1;
     const currentDay = new Date().getDate();
 
     api
@@ -143,7 +143,7 @@ export const ContextProvider = ({ children }: IContextProviderProps) => {
 
   const onRetrieverGoalByDate = () => {
     const currentYear = new Date().getFullYear();
-    const currentMonth = new Date().getMonth();
+    const currentMonth = new Date().getMonth() + 1;
     const currentDay = new Date().getDate();
 
     api
