@@ -11,7 +11,7 @@ export const History = () => {
 
   const formatDate = (inputDate: string) => {
     const [year, month, day] = inputDate.split("-");
-    return `${day}/${month}/${year}`;
+    return `${day}-${month}-${year}`;
   };
 
   useEffect(() => {
