@@ -18,22 +18,25 @@
 
 ## Funcionalidades Principais:
 
-Cadastro do Usuário (Tela 1):
+👤 Cadastro do Usuário (Tela 1):
 - Implementei uma rota para que os usuários possam se cadastrar fornecendo seu nome, email, senha e peso em Kg.
 
-Login do Usuário (Tela 2):
+🔑 Login do Usuário (Tela 2):
 - Implementei um sistema de login seguro com email e senha.
 - A API retorna tokens JWT após a autenticação bem-sucedida.
 
-Registro e Visualização do Consumo de Água (Tela 3):
+📊 Registro e Visualização do Consumo de Água (Tela 3):
 - Desenvolvi funcionalidades que permitem aos usuários registrar a quantidade de água consumida.
 - Após o registro, a API fornece dados em tempo real sobre o consumo atual, quantidade restante para atingir a meta diária, e se a meta já foi alcançada.
 
-Histórico de Consumo (Tela 4):
+💧 Histórico de Consumo (Tela 4):
 - Criei uma rota para que os usuários possam acessar o registro de dias anteriores.
 
-Atualização de Dados do Usuário (Tela 5):
+📱 Atualização de Dados do Usuário (Tela 5):
 - Adicionei uma tela para permitir que os usuários atualizem informações como nome e peso.
+
+📐 Cálculo da Meta Diária:
+- A meta diária é calculada automaticamente com base no peso do usuário (em Kg) multiplicado por 35ml.
 
 <br />
 
