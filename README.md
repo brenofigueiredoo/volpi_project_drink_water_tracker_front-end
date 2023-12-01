@@ -4,7 +4,7 @@
  
  # Drink water tracker 💧
 
- Frontend "Lembrar de Beber Água" 📱, proporcionando uma experiência intuitiva e amigável. A interface permite aos usuários registrar o consumo diário, visualizar metas personalizadas com base no peso e atualizar facilmente suas informações.
+ Frontend "Lembrar de Beber Água" 📱, proporciona uma experiência intuitiva e amigável. A interface permite aos usuários registrar o consumo diário, visualizar metas personalizadas com base no peso e atualizar facilmente suas informações.
  
 ***➡ Para acessar a aplicação: [Clique aqui](https://volpi-project-drink-water-tracker-front-end.vercel.app)***
 
