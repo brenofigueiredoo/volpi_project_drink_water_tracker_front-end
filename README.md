@@ -1,7 +1,3 @@
-> Repositório de projeto Front-End desenvolvido em React para vaga de Software Engineer na Volpi.
- <br />
- 
- 
  # Drink water tracker 💧
 
  Frontend "Lembrar de Beber Água" 📱, proporciona uma experiência intuitiva e amigável. A interface permite aos usuários registrar o consumo diário, visualizar metas personalizadas com base no peso e atualizar facilmente suas informações.
